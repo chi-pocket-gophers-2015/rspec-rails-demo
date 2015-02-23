@@ -12,20 +12,16 @@ class ArticlesController < ApplicationController
   end
 
   def create
-    @category = Category.find(params[:category_id])
-    @article = @category.articles.build(article_params)
-    @article.author = current_user
+    @article = current_user.articles.build(article_params)
+    @article.category = Category.find_by_id(params[:article][:category])
 
     if @article.save
-      redirect_to category_article_path(@category, @article)
+      redirect_to category_article_path(@article.category, @article)
     else
+      @categories = Category.all
       @errors = @article.errors
       render :new
     end
-  end
-
-  def article_params
-    params.require(:article).permit(:title, :description, :price)
   end
 
   def show
@@ -40,4 +36,9 @@ class ArticlesController < ApplicationController
   def destroy
   end
 
+  private
+
+  def article_params
+    params.require(:article).permit(:title, :description, :price)
+  end
 end
