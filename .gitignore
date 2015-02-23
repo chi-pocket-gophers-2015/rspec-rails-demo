@@ -16,4 +16,4 @@
 /tmp
 
 
-/app/controllers/.DS_Store
+*.DS_Store
