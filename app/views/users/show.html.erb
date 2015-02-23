@@ -1,0 +1,6 @@
+<h1>Welcome <%= current_user.username %></h1>
+
+  <h3>Current Articles</h3>
+    <% current_user.articles.each do |article| %>
+      <p><%= link_to article.title, article %></p>
+    <% end %>
