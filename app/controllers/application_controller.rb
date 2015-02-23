@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::Base
-  helper_method :current_user, :logged_in?
+  protect_from_forgery with: :exception
+
+  helper_method :current_user, :logged_in?, :authenticate
 
   def current_user
     @_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -9,5 +11,11 @@ class ApplicationController < ActionController::Base
     current_user != nil
   end
 
-  protect_from_forgery with: :exception
+  def authenticate
+    unless logged_in?
+      flash[:error] = "You need to be logged in to view that page."
+      redirect_to login_path
+    end
+  end
+
 end
