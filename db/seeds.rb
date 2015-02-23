@@ -13,15 +13,13 @@ User.create!(email: "test@test.com", username: "TestUser", password: "password")
                password: "password")
 end
 
-50.times do
-  Category.create!(name: Faker::Lorem.word)
-end
+categories = Faker::Lorem.words(50)
 
 User.all.each do |user|
   rand(10..30).times do
     user.articles.create(title: Faker::Lorem.words(4).join(" "),
                          description: Faker::Lorem.sentences(10).join(" "),
-                         category: Category.all.sample,
+                         category: Category.find_or_create_by(name: categories.sample),
                          price: [rand(1.0..999.99), nil, nil, nil].sample)
   end
 end
