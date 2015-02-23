@@ -25,15 +25,32 @@ class ArticlesController < ApplicationController
   end
 
   def show
+    @article = Article.find(params[:id])
   end
 
   def edit
+    @categories = Category.all
+    @article = Article.find(params[:id])
   end
 
   def update
+    @article = Article.find(params[:id])
+    @article.attributes = article_params
+    @article.category = Category.find_by_id(params[:article][:category])
+
+    if @article.save
+      redirect_to category_article_path(@article.category, @article)
+    else
+      @errors = @article.errors
+      render :edit
+    end
   end
 
   def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+
+    redirect_to dashboard_path
   end
 
   private

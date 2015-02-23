@@ -2,5 +2,5 @@
 
   <h3>Current Articles</h3>
     <% current_user.articles.each do |article| %>
-      <p><%= link_to article.title, article %></p>
+      <p><%= link_to article.title, category_article_path(article.category, article) %></p>
     <% end %>
