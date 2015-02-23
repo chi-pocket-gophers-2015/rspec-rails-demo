@@ -2,7 +2,7 @@
 
 <% @articles.each do |article| %>
   <div>
-    <p><%= article.title %> | <%= article.price %></p>
+    <p><%= link_to article.title, category_article_path(@category,article) %> | <%= article.price %></p>
     <p><%= article.created_at.strftime("%a %B %e %Y") %></p>
     <p><%= article.author.username %></p>
     <p><%= article.description %></p>
