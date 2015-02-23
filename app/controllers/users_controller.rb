@@ -24,11 +24,4 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :email, :password)
   end
-
-  def authenticate
-    unless logged_in?
-      flash[:error] = "You need to be logged in to view that page."
-      redirect_to login_path
-    end
-  end
 end
