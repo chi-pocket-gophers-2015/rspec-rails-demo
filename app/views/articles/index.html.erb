@@ -1,0 +1,10 @@
+<h1><%= @category.name %></h1>
+
+<% @articles.each do |article| %>
+  <div>
+    <p><%= article.title %> | <%= article.price %></p>
+    <p><%= article.created_at.strftime("%a %B %e %Y") %></p>
+    <p><%= article.author.username %></p>
+    <p><%= article.description %></p>
+  </div>
+<% end %>
