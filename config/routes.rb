@@ -8,13 +8,13 @@ Rails.application.routes.draw do
   post "/signup" => "users#create"
   get "/dashboard" => "users#show", as: :dashboard
 
-
-
   resources :categories, only: :index do
     resources :articles, only: [:index, :show]
   end
 
   resources :articles, only: [:new, :create, :edit, :update, :destroy]
+
+  root to: 'categories#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
