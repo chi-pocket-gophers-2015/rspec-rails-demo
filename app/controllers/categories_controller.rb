@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
+  respond_to :html, :json
   def index
-    @categories = Category.order(name: :asc)
+    respond_with @categories = Category.order(name: :asc)
   end
 end
